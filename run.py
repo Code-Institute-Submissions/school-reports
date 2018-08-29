@@ -13,7 +13,7 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html", schoolforms=mongo.db.forms_db.find())
+    return render_template("index.html", schoolforms=mongo.db.schoolforms_collection.find())
     
 @app.route('/add_form')
 def add_form():
@@ -21,21 +21,21 @@ def add_form():
     
 @app.route('/insert_form', methods=['POST'])
 def insert_form():
-    schoolforms =  mongo.db.forms_db
+    schoolforms =  mongo.db.schoolforms_collection
     schoolforms.insert_one(request.form.to_dict())
     return redirect(url_for('index'))
     
-@app.route('/edit_form/<form_id>')
-def edit_form(form_id):
-    schoolform =  mongo.db.forms_db.find_one({"_id": ObjectId(form_id)})
+@app.route('/edit_form/<schoolform_id>')
+def edit_form(schoolform_id):
+    schoolform =  mongo.db.schoolforms_collection.find_one({"_id": ObjectId(schoolform_id)})
     return render_template('editform.html', schoolform=schoolform)
     
-@app.route('/update_form/<form_id>', methods=["POST"])
-def update_form(form_id):
-    mongo.db.forms_db.update(
-        {'_id': ObjectId(form_id)},
+@app.route('/update_form/<schoolform_id>', methods=["POST"])
+def update_form(schoolform_id):
+    mongo.db.schoolforms_collection.update(
+        {'_id': ObjectId(schoolform_id)},
         {
-            'Form': request.form.get('Form'),
+            'Form_Name': request.form.get('Form_Name'),
             'Teacher': request.form.get('Teacher')
         })
     return redirect(url_for('index'))
