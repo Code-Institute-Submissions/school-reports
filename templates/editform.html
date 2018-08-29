@@ -1,0 +1,6 @@
+<form action="{{ url_for('update_form', form_id=schoolform._id)}}" method="POST">
+<p>Form: <input name="Form" value="{{schoolform.Form}}"></input></p>
+<p>Teacher: <input name="Teacher" value ="{{schoolform.Teacher}}"></input></p>
+<button type="submit" name="action">Update</button>
+</form>
+
