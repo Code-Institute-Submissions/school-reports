@@ -1,0 +1,14 @@
+<html>
+    <head></head>
+    <body>
+        <h1>Forms</h1>
+        {% for schoolform in schoolforms %}
+        <p>Form: {{ schoolform.Form }}</p>
+        <p>Teacher: {{ schoolform.Teacher}}</p>
+        <p><a href="">Edit</a></p>
+        <p><a href="">Delete</a></p>
+        {% endfor %}
+        
+        <a href="">Add new form</a>
+    </body>
+</html>
