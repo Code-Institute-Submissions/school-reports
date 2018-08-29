@@ -14,6 +14,17 @@ mongo = PyMongo(app)
 def index():
     return render_template("index.html", schoolforms=mongo.db.forms_db.find())
     
+@app.route('/add_form')
+def add_form():
+    return render_template('addform.html',
+    categories=mongo.db.categories.find())
+    
+@app.route('/insert_form', methods=['POST'])
+def insert_form():
+    schoolforms =  mongo.db.forms_db
+    schoolforms.insert_one(request.form.to_dict())
+    return redirect(url_for('index'))
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
