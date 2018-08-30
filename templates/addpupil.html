@@ -1,0 +1,18 @@
+<html>
+    <head></head>
+    <body>
+        <form action="{{ url_for('insert_pupil')}}" method="POST">
+                <p>First Name: <input name="First_Name"></input></p>
+                <p>Surname: <input name="Surname"></input></p>
+                <p>Date of Birth: <input name ="Date_of_Birth"></input></p>
+                <p><select name="Form_Name">
+                    {% for schoolform in schoolforms %}
+                    
+                    <option>{{schoolform.Form_Name}} {% if schoolform.Form_Name == schoolform_name %}selected{% endif %}</option>
+                    
+                    {% endfor %}
+                </select></p>
+            <button type="submit" name="action">Add</button>
+        </form>      
+    </body>
+</html>

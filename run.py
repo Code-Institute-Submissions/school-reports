@@ -61,6 +61,16 @@ def update_pupil(pupil_id):
         })
     return redirect(url_for('schoolform', schoolform_name = request.form.get('Form_Name')))
     
+@app.route('/add_pupil')
+def add_pupil():
+    return render_template('addpupil.html', schoolforms =  mongo.db.schoolforms_collection.find())
+    
+@app.route('/insert_pupil', methods=['POST'])
+def insert_pupil():
+    pupils = mongo.db.pupils_collection
+    pupils.insert_one(request.form.to_dict())
+    return redirect(url_for('schoolform', schoolform_name = request.form.get('Form_Name')))
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
