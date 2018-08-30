@@ -1,0 +1,9 @@
+<html>
+    <head></head>
+    <body>
+        <form action="{{ url_for('update_subject', subject_id=subject._id)}}" method="POST">
+                <p>Name of subject: <input name="Title" value="{{subject.Title}}"></input></p>
+            <button type="submit" name="action">Update</button>
+        </form>      
+    </body>
+</html>

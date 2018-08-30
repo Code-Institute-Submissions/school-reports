@@ -71,6 +71,34 @@ def insert_pupil():
     pupils.insert_one(request.form.to_dict())
     return redirect(url_for('schoolform', schoolform_name = request.form.get('Form_Name')))
     
+@app.route('/subjects')
+def subjects():
+    return render_template("subjects.html", subjects=mongo.db.subjects_collection.find())
+    
+@app.route('/add_subject')
+def add_subject():
+    return render_template('addsubject.html')
+    
+@app.route('/insert_subject', methods=['POST'])
+def insert_subject():
+    subjects = mongo.db.subjects_collection
+    subjects.insert_one(request.form.to_dict())
+    return redirect(url_for('subjects'))
+    
+@app.route('/edit_subject/<subject_id>')
+def edit_subject(subject_id):
+    subject = mongo.db.subjects_collection.find_one({"_id": ObjectId(subject_id)})
+    return render_template('editsubject.html', subject=subject)
+    
+@app.route('/update_subject/<subject_id>', methods=["POST"])
+def update_subject(subject_id):
+    mongo.db.subjects_collection.update(
+        {'_id': ObjectId(subject_id)},
+        {
+            'Title': request.form.get('Title')
+        })
+    return redirect(url_for('subjects'))
+    
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
