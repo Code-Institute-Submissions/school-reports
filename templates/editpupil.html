@@ -1,16 +1,43 @@
-<html>
-    <head></head>
-    <body>
-        <form action="{{ url_for('update_pupil', pupil_id=pupil._id)}}" method="POST">
-                <p>First Name: <input value="{{ pupil.First_Name }}" name="First_Name"></input></p>
-                <p>Surname: <input value ="{{ pupil.Surname }}" name="Surname"></input></p>
-                <p>Date of Birth: <input value="{{ pupil.Date_of_Birth }}" name ="Date_of_Birth"></input></p>
-                <p><select name="Form_Name">
-                    {% for schoolform in schoolforms %}
-                    <option>{{schoolform.Form_Name}}</option>
-                    {% endfor %}
-                </select></p>
-            <button type="submit" name="action">Update</button>
-        </form>      
-    </body>
-</html>
+{% extends 'base.html'%} {% block content %}
+<h1>Edit student details</h1>
+<form action="{{ url_for('update_pupil', pupil_id=pupil._id)}}" method="POST">
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">person</i>
+            <input id="category_name" name="First_Name" value="{{pupil.First_Name}}" type="text">
+            <label for="category_name">First Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">person</i>
+            <input id="category_name" name="Surname" value="{{pupil.Surname}}" type="text">
+            <label for="category_name">Surname</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">cake</i>
+            <input id="category_name" name="Date_of_Birth" value="{{pupil.Date_of_Birth}}" type="text">
+            <label for="category_name">Date of Birth</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">group</i>
+            <select name="Form_Name">
+                {% for schoolform in schoolforms %}
+                <option {% if schoolform.Form_Name == pupil.Form_Name %}selected{% endif %}>{{schoolform.Form_Name}} </option>
+                {% endfor %}
+            </select>
+            <label>Form</label>
+        </div>
+    </div>
+    <div class="row">
+
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        </button>
+    </div>
+</form>
+
+{% endblock %}

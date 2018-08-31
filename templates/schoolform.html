@@ -1,15 +1,21 @@
-<html>
-    <head></head>
-    <h1>Form {{schoolform_name}}</h1>
-    <body>
-            {% for pupil in pupils %}
-                {% if schoolform_name == pupil.Form_Name %}
-                <p>Name: {{ pupil.First_Name }} {{ pupil.Surname }}</p>
-                <p>Date of Birth: {{ pupil.Date_of_Birth }}</p>
-                <p><a href="{{url_for('edit_pupil', pupil_id= pupil._id)}}">Edit</a></p>
-                <p><a href="">Delete</a></p>
-                {% endif %}
-            {% endfor %}
-        <p><a href="{{url_for('add_pupil', schoolform_name=schoolform_name)}}">Add new pupil</a></p>
-    </body>
-</html>
+{% extends 'base.html'%} {% block content %}
+<h1>{{schoolform_name}}</h1>
+<div class="row">
+    <div class="col s6">
+    {% for pupil in pupils %}
+        {% if schoolform_name == pupil.Form_Name %}
+            <h2>{{ pupil.First_Name }} {{ pupil.Surname }}</h2>
+            <p><strong>Date of Birth:</strong> {{ pupil.Date_of_Birth }}</p>
+            <p><a href="{{url_for('edit_pupil', pupil_id= pupil._id)}}" class="waves-effect waves-light btn edit">Edit</a>
+            <a href="" class="waves-effect waves-light btn delete">Delete</a></p>
+        {% endif %}
+    {% endfor %}
+    </div>
+    <div class="col s6">
+        <div class="side-box">
+            <p><strong>Click on a student's name for report details. Or use the button below to add a new report.</strong></p>
+            <p><a href="{{url_for('add_pupil', schoolform_name=schoolform_name)}}" class="waves-effect waves-light btn">Add new student</a></p>
+        </div>
+    </div>
+    </div>
+{% endblock %}
