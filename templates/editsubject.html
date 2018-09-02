@@ -1,9 +1,18 @@
-<html>
-    <head></head>
-    <body>
+{% extends 'base.html'%} {% block content %}
+<h1>Edit subject</h1>
         <form action="{{ url_for('update_subject', subject_id=subject._id)}}" method="POST">
-                <p>Name of subject: <input name="Title" value="{{subject.Title}}"></input></p>
-            <button type="submit" name="action">Update</button>
-        </form>      
-    </body>
-</html>
+          <div class="row">
+<div class="input-field col s6">
+            <i class="material-icons prefix">local_library</i>
+            <input id="Title" name="Title" type="text" value="{{subject.Title}}">
+            <label for="Title">Name of subject</label>
+        </div>
+        </div>
+        <div class="row">
+        <button class="btn waves-effect waves-light" type="submit">Submit
+        </button>
+    </div>
+</form>
+       
+{% endblock %}
+

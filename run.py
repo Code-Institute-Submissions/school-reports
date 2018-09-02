@@ -7,17 +7,42 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'mytestdb'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI','mongodb://root:Flash23@ds119072.mlab.com:19072/mytestdb')
 
-
 mongo = PyMongo(app)
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return render_template("index.html", schoolforms=mongo.db.schoolforms_collection.find())
+    schoolforms=mongo.db.schoolforms_collection.find().sort([("Form_Name", 1)])
+    return render_template("index.html", schoolforms=schoolforms)
     
 @app.route('/schoolform/<schoolform_name>')
 def schoolform(schoolform_name):
-    return render_template("schoolform.html", schoolform_name=schoolform_name, pupils=mongo.db.pupils_collection.find(), forms=mongo.db.schoolforms_collection.find())
+    pupils=mongo.db.pupils_collection.find().sort([("Surame", 1)])
+    return render_template("schoolform.html", schoolform_name=schoolform_name, pupils=pupils, forms=mongo.db.schoolforms_collection.find())
+    
+@app.route('/schoolform/<schoolform_name>/<pupil_id>')
+def pupil(schoolform_name, pupil_id):
+    pupil = mongo.db.pupils_collection.find_one({"_id": ObjectId(pupil_id)})
+    reports = mongo.db.reports_collection.find().sort([("Date", -1), ("Title", 1) ])
+    return render_template("pupil.html", pupil=pupil, reports=reports)
+    
+@app.route('/schoolform/<schoolform_name>/<pupil_id>/add_report')
+def add_report(schoolform_name, pupil_id):
+    pupil = mongo.db.pupils_collection.find_one({"_id": ObjectId(pupil_id)})
+    subjects=mongo.db.subjects_collection.find().sort([("Title", 1)])
+    return render_template("addreport.html", pupil=pupil, pupil_id=pupil_id, schoolform_name=schoolform_name, subjects=subjects)
+    
+@app.route('/insert_report/<schoolform_name>/<pupil_id>', methods=['POST'])
+def insert_report(schoolform_name, pupil_id):
+    reports = mongo.db.reports_collection
+    reports.insert_one(request.form.to_dict())
+    return redirect(url_for('pupil', schoolform_name = schoolform_name, pupil_id=pupil_id))
+    
+@app.route('/schoolform/<schoolform_name>/<pupil_id>/<report_id>')
+def edit_report(schoolform_name, pupil_id, report_id):
+    report = mongo.db.reports_collection.find_one({"_id": ObjectId(report_id)})
+    subjects = mongo.db.subjects_collection.find().sort([("Title", 1)])
+    return render_template("editreport.html", report=report, pupil_id=pupil_id, schoolform_name=schoolform_name, subjects=subjects)
     
 @app.route('/add_form')
 def add_form():
@@ -44,6 +69,21 @@ def update_form(schoolform_id):
         })
     return redirect(url_for('index'))
     
+@app.route('/update_report/<schoolform_name>/<pupil_id>/<report_id>', methods=["POST"])
+def update_report(schoolform_name, pupil_id, report_id):
+    mongo.db.reports_collection.update(
+        {'_id': ObjectId(report_id)},
+        {
+    'First_Name': request.form.get('First_Name'),
+    'Surname': request.form.get('Surname'),
+    'Date_of_Birth': request.form.get('Date_of_Birth'),
+    'Form_Name': request.form.get('Form_Name'),
+    'Title': request.form.get('Title'),
+    'Date': request.form.get('Date'),
+    'Details': request.form.get('Details')
+        })
+    return redirect(url_for('pupil', schoolform_name=schoolform_name, pupil_id=pupil_id))
+    
 @app.route('/edit_pupil/<pupil_id>')
 def edit_pupil(pupil_id):
     pupil = mongo.db.pupils_collection.find_one({"_id": ObjectId(pupil_id)})
@@ -63,7 +103,7 @@ def update_pupil(pupil_id):
     
 @app.route('/add_pupil')
 def add_pupil():
-    return render_template('addpupil.html', schoolforms =  mongo.db.schoolforms_collection.find())
+    return render_template('addpupil.html', schoolforms = mongo.db.schoolforms_collection.find())
     
 @app.route('/insert_pupil', methods=['POST'])
 def insert_pupil():
@@ -73,7 +113,8 @@ def insert_pupil():
     
 @app.route('/subjects')
 def subjects():
-    return render_template("subjects.html", subjects=mongo.db.subjects_collection.find())
+    subjects=mongo.db.subjects_collection.find().sort([("Title", 1)])
+    return render_template("subjects.html", subjects=subjects)
     
 @app.route('/add_subject')
 def add_subject():
@@ -98,6 +139,10 @@ def update_subject(subject_id):
             'Title': request.form.get('Title')
         })
     return redirect(url_for('subjects'))
+    
+
+
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),

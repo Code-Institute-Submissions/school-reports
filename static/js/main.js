@@ -1,5 +1,7 @@
 $(document).ready(function() {
-   
-    $('select').material_select();
-  
+   $('select').formSelect();
+    $('.collapsible').collapsible();
+    $('.button-collapse').sideNav();
+    $('.modal').modal();
 });
+

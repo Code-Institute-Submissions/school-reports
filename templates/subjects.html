@@ -1,12 +1,17 @@
-<html>
-    <head></head>
-    <body>
+{% extends 'base.html'%} {% block content %}
+<h1>Subjects</h1>
+<div class="row">
+    <div class="col s6"> 
        {% for subject in subjects %}
-       <p>{{subject.Title}}</p>
-       <p><a href="{{url_for('edit_subject', subject_id=subject._id)}}">Edit</a></p>
-       <p><a href="">Delete</a></p>
+       <h2>{{subject.Title}}</h2>
+       <p><a href="{{url_for('edit_subject', subject_id=subject._id)}}" class="waves-effect waves-light btn edit">Edit</a>
+       <a href="" class="waves-effect waves-light btn delete">Delete</a></p>
       {% endfor %}
-      
-      <p><a href="{{url_for('add_subject')}}">Add new subject</a></p>
-    </body>
-</html>
+      </div>
+      <div class="col s6">
+           <div class="side-box">
+      <p><a href="{{url_for('add_subject')}}" class="waves-effect waves-light btn">Add new subject</a></p>
+      </div>
+      </div>
+      </div>
+{% endblock %}

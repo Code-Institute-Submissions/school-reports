@@ -4,7 +4,7 @@
     <div class="col s6">
     {% for pupil in pupils %}
         {% if schoolform_name == pupil.Form_Name %}
-            <h2>{{ pupil.First_Name }} {{ pupil.Surname }}</h2>
+            <h2><a href="{{url_for('pupil', pupil_id= pupil._id,schoolform_name=schoolform_name)}}">{{ pupil.First_Name }} {{ pupil.Surname }}</h2></a>
             <p><strong>Date of Birth:</strong> {{ pupil.Date_of_Birth }}</p>
             <p><a href="{{url_for('edit_pupil', pupil_id= pupil._id)}}" class="waves-effect waves-light btn edit">Edit</a>
             <a href="" class="waves-effect waves-light btn delete">Delete</a></p>

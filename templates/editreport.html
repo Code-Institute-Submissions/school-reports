@@ -1,0 +1,41 @@
+{% extends 'base.html'%} {% block content %}
+<h1>Edit report for {{report.First_Name}} {{report.Surname}} - {{report.Form_Name}}</h1>
+<form action="{{ url_for('update_report', pupil_id=pupil_id, report_id=report._id, schoolform_name=schoolform_name)}}" method="POST">
+    <input type="hidden" value="{{report.First_Name}}" name="First_Name" />
+    <input type="hidden" value="{{report.Surname}}" name="Surname" />
+    <input type="hidden" value="{{report.Form_Name}}" name="Form_Name" />
+    <input type="hidden" value="{{report.Date_of_Birth}}" name="Date_of_Birth" />
+    
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">local_library</i>
+            <select name="Title">
+                {% for subject in subjects %}
+                <option {% if subject.Title == report.Title %}selected{% endif %}>{{subject.Title}}</option>
+                {% endfor %}
+            </select>
+            <label>Subject</label>
+        </div>
+    </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">date_range</i>
+            <input id="Date" name="Date" type="text">
+            <label for="Date">Date</label>
+        </div>
+    </div>
+     <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea name="Details" id="Details" class="materialize-textarea">{{report.Details}}</textarea>
+                <label for="Details">Details</label>
+            </div>
+        </div>
+    <div class="row">
+        <button class="btn waves-effect waves-light" type="submit">Submit
+        </button>
+    </div>
+</form>
+{% endblock %}
+
+

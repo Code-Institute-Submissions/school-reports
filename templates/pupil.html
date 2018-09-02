@@ -1,0 +1,24 @@
+{% extends 'base.html'%} {% block content %}
+
+<h1> Reports for {{pupil.First_Name}} {{pupil.Surname}} - {{pupil.Form_Name}}</h1>
+<div class="row">
+<div class="col s6">
+{% for report in reports %}
+{% if report.First_Name == pupil.First_Name and report.Surname == pupil.Surname and report.Date_of_Birth == pupil.Date_of_Birth %}
+<h2>{{report.Title}}</h2>
+<h3>{{report.Date}}</h3>
+<p>{{report.Details}}</p>
+<p><a href="{{url_for('edit_report', schoolform_name = pupil.Form_Name, pupil_id=pupil._id, report_id=report._id)}}" class="waves-effect waves-light btn edit">Edit</a>
+    <a href="" class="waves-effect waves-light btn delete">Delete</a></p>
+{% endif %}
+{% endfor %}
+  </div>
+    <div class="col s6">
+        <div class="side-box">
+            <p><a href="{{url_for('add_report', schoolform_name = pupil.Form_Name, pupil_id=pupil._id)}}" class="waves-effect waves-light btn">Add new report</a></p>
+        </div>
+    </div>
+    </div>
+   
+{% endblock %}
+
