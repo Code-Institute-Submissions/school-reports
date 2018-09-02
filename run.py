@@ -15,9 +15,14 @@ def index():
     schoolforms=mongo.db.schoolforms_collection.find().sort([("Form_Name", 1)])
     return render_template("index.html", schoolforms=schoolforms)
     
+@app.route('/delete_form/<schoolform_id>', methods=['POST'])
+def delete_schoolform(schoolform_id):
+    mongo.db.schoolforms_collection.remove({'_id': ObjectId(schoolform_id)})
+    return redirect(url_for('index'))
+    
 @app.route('/schoolform/<schoolform_name>')
 def schoolform(schoolform_name):
-    pupils=mongo.db.pupils_collection.find().sort([("Surame", 1)])
+    pupils=mongo.db.pupils_collection.find().sort([("Surname", 1)])
     return render_template("schoolform.html", schoolform_name=schoolform_name, pupils=pupils, forms=mongo.db.schoolforms_collection.find())
     
 @app.route('/schoolform/<schoolform_name>/<pupil_id>')
@@ -140,9 +145,20 @@ def update_subject(subject_id):
         })
     return redirect(url_for('subjects'))
     
-
-
+@app.route('/delete_subject/<subject_id>', methods=['POST'])
+def delete_subject(subject_id):
+    mongo.db.subjects_collection.remove({'_id': ObjectId(subject_id)})
+    return redirect(url_for('subjects'))
     
+@app.route('/delete_pupil/<schoolform_name>/<pupil_id>', methods=['POST'])
+def delete_pupil(schoolform_name, pupil_id):
+    mongo.db.pupils_collection.remove({'_id': ObjectId(pupil_id)})
+    return redirect(url_for('schoolform', schoolform_name =schoolform_name))
+
+@app.route('/delete_report/<schoolform_name>/<pupil_id>/<report_id>', methods=['POST'])
+def delete_report(schoolform_name, pupil_id, report_id):
+    mongo.db.reports_collection.remove({'_id': ObjectId(report_id)})
+    return redirect(url_for('pupil', schoolform_name=schoolform_name, pupil_id=pupil_id))
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
