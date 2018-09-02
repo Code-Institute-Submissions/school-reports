@@ -12,13 +12,13 @@
         <div class="input-field col s6">
             <i class="material-icons prefix">person</i>
             <input id="Surname" name="Surname" value="{{pupil.Surname}}" type="text">
-            <label for="Surname>Surname</label>
+            <label for="Surname">Surname</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s6">
             <i class="material-icons prefix">cake</i>
-            <input id="Date_of_Birth" name="Date_of_Birth" value="{{pupil.Date_of_Birth}}" type="text">
+            <input id="Date_of_Birth" name="Date_of_Birth"  class="datepicker" value="{{pupil.Date_of_Birth}}" type="text">
             <label for="Date_of_Birth">Date of Birth</label>
         </div>
     </div>
@@ -34,10 +34,19 @@
         </div>
     </div>
     <div class="row">
-
         <button class="btn waves-effect waves-light" type="submit" name="action">Submit
         </button>
     </div>
 </form>
 
+{% endblock %}
+
+{% block additional_scripts %}
+<script src="{{ url_for('static', filename='js/task_datepicker.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        preparePicker();
+        setDueDate('{{pupil.Date_of_Birth}}');
+    });
+</script>
 {% endblock %}

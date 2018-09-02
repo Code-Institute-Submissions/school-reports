@@ -20,14 +20,14 @@
       <div class="row">
         <div class="input-field col s6">
             <i class="material-icons prefix">date_range</i>
-            <input id="Date" name="Date" type="text">
+            <input id="Date" name="Date" value="{{report.Date}}" class="datepicker" type="text">
             <label for="Date">Date</label>
         </div>
     </div>
      <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">subject</i>
-                <textarea name="Details" id="Details" class="materialize-textarea">{{report.Details}}</textarea>
+                <textarea name="Details" id="Details" class="materialize-textarea" data-length>{{report.Details}}</textarea>
                 <label for="Details">Details</label>
             </div>
         </div>
@@ -36,6 +36,15 @@
         </button>
     </div>
 </form>
+{% endblock %}
+{% block additional_scripts %}
+<script src="{{ url_for('static', filename='js/task_datepicker.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        preparePicker();
+        setDueDate('{{report.Date}}');
+    });
+</script>
 {% endblock %}
 
 
