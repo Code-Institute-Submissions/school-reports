@@ -1,26 +1,21 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Forms</h1>
 <div class="row">
-    <div class="col s6">
+    <div class="col s12 m6">
         {% for schoolform in schoolforms %}
         <h2><a href="{{url_for('schoolform', schoolform_name=schoolform.Form_Name)}}">{{ schoolform.Form_Name }}<i class="material-icons">chevron_right</i></a></h2>
         <p><strong>Teacher:</strong> {{ schoolform.Teacher}}</p>
         <a href="{{url_for('edit_form', schoolform_id=schoolform._id)}}" class="waves-effect waves-light btn edit">Edit</a>
-         <form action="{{url_for('delete_schoolform', schoolform_id=schoolform._id)}}" class="delete-form" method="POST">
-                        <button type="submit" class="waves-effect waves-light btn btn_small delete">Delete</button>
-                    </form>
+        <form action="{{url_for('delete_schoolform', schoolform_id=schoolform._id)}}" class="delete-form" method="POST">
+            <button type="submit" class="waves-effect waves-light btn btn_small delete">Delete</button>
+        </form>
         {% endfor %}
     </div>
-    <div class="col s6">
+    <div class="col s12 m6">
         <div class="side-box">
-        <p><strong>Click on a form name for student details. Or use the button below to add a new form.</strong></p>
-        <p><a href="{{url_for('add_form')}}" class="waves-effect waves-light btn">Add new form</a></p>
+            <p><strong>Click on a form name for student details. Or use the button below to add a new form.</strong></p>
+            <p><a href="{{url_for('add_form')}}" class="waves-effect waves-light btn">Add new form</a></p>
         </div>
     </div>
 </div>
- 
-
-
 {% endblock %}
-
-

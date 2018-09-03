@@ -1,13 +1,33 @@
 {% extends 'base.html'%} {% block content %}
-<h1>Add new report for {{pupil.First_Name}} {{pupil.Surname}} - {{pupil.Form_Name}}</h1>
+<h1>Add new report</h1>
 <form action="{{ url_for('insert_report', schoolform_name=schoolform_name, pupil_id=pupil_id)}}" method="POST">
-    <input type="hidden" value="{{pupil.First_Name}}" name="First_Name" />
-    <input type="hidden" value="{{pupil.Surname}}" name="Surname" />
-    <input type="hidden" value="{{pupil.Form_Name}}" name="Form_Name" />
-    <input type="hidden" value="{{pupil.Date_of_Birth}}" name="Date_of_Birth" />
-    
+      <div class="row">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">person</i>
+            <input id="First_Name" name="First_Name" type="text" required>
+            <label for="First_Name">First Name</label>
+        </div>
+    </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">person</i>
+            <input id="Surname" name="Surname" type="text" required>
+            <label for="Surname">Surname</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">group</i>
+            <select name="Form_Name">
+                {% for schoolform in schoolforms %}
+                <option value="{{schoolform.Form_Name}}">{{schoolform.Form_Name}}</option>
+                {% endfor %}
+            </select>
+            <label>Form</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">local_library</i>
             <select name="Title">
                 {% for subject in subjects %}
@@ -17,26 +37,23 @@
             <label>Subject</label>
         </div>
     </div>
-      <div class="row">
-        <div class="input-field col s6">
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">date_range</i>
-            <input id="Date" name="Date" class="datepicker" type="text">
+            <input id="Date" name="Date" class="datepicker" type="text" required>
             <label for="Date">Date</label>
         </div>
     </div>
-    
-     <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">subject</i>
-                <textarea name="Details" id="Details" class="materialize-textarea" data-length></textarea>
-                <label for="Details">Details</label>
-            </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">subject</i>
+            <textarea name="Details" id="Details" class="materialize-textarea" data-length required></textarea>
+            <label for="Details">Details</label>
         </div>
+    </div>
     <div class="row">
         <button class="btn waves-effect waves-light" type="submit">Submit
         </button>
     </div>
 </form>
 {% endblock %}
-
-

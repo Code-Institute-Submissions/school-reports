@@ -1,19 +1,19 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Subjects</h1>
 <div class="row">
-    <div class="col s6"> 
-       {% for subject in subjects %}
-       <h2>{{subject.Title}}</h2>
-       <a href="{{url_for('edit_subject', subject_id=subject._id)}}" class="waves-effect waves-light btn edit">Edit</a>
-       <form action="{{url_for('delete_subject', subject_id=subject._id)}}" class="delete-form" method="POST">
-                        <button type="submit" class="waves-effect waves-light btn btn_small delete">Delete</button>
-                    </form>
-      {% endfor %}
-      </div>
-      <div class="col s6">
-           <div class="side-box">
-      <p><a href="{{url_for('add_subject')}}" class="waves-effect waves-light btn">Add new subject</a></p>
-      </div>
-      </div>
-      </div>
+    <div class="col s12 m6">
+        {% for subject in subjects %}
+        <h2>{{subject.Title}}</h2>
+        <a href="{{url_for('edit_subject', subject_id=subject._id)}}" class="waves-effect waves-light btn edit">Edit</a>
+        <form action="{{url_for('delete_subject', subject_id=subject._id)}}" class="delete-form" method="POST">
+            <button type="submit" class="waves-effect waves-light btn btn_small delete">Delete</button>
+        </form>
+        {% endfor %}
+    </div>
+    <div class="col s12 m6">
+        <div class="side-box">
+            <p><a href="{{url_for('add_subject')}}" class="waves-effect waves-light btn">Add new subject</a></p>
+        </div>
+    </div>
+</div>
 {% endblock %}

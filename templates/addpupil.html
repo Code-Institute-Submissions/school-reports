@@ -2,28 +2,28 @@
 <h1>Add new student</h1>
 <form action="{{ url_for('insert_pupil')}}" method="POST">
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">person</i>
-            <input id="First_Name" name="First_Name" type="text">
+            <input id="First_Name" name="First_Name" type="text" required>
             <label for="First_Name">First Name</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">person</i>
-            <input id="Surname" name="Surname" type="text">
+            <input id="Surname" name="Surname" type="text" required>
             <label for="Surname">Surname</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">cake</i>
-            <input id="Date_of_Birth" name="Date_of_Birth" type="text" class="datepicker">
+            <input id="Date_of_Birth" name="Date_of_Birth" type="text" class="datepicker" required>
             <label for="Date_of_Birth">Date of Birth</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">group</i>
             <select name="Form_Name">
                 {% for schoolform in schoolforms %}
@@ -41,5 +41,3 @@
 </form>
 
 {% endblock %}
-
-

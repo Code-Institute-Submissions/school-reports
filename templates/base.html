@@ -1,4 +1,5 @@
-</html><!DOCTYPE html>
+</html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,28 +7,30 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>School Reports</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}" type="text/css" />
 </head>
-      <nav>
+<nav>
     <div class="nav-wrapper">
-      
-        <a href="{{url_for('index')}}" class="brand-logo"><i class="material-icons">school</i>School Reports</a>
-      <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
-        <li><a href="{{url_for('index')}}">Home (Forms)</a></li>
-        <li><a href="{{url_for('subjects')}}">Subjects</a></li>
-        <li><a href="{{url_for('add_pupil')}}">Add Student</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <ul class="sidenav" id="mobile-demo">
+        <a href="{{url_for('index')}}" class="brand-logo"><i class="material-icons">school</i>School Reports</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+            <li><a href="{{url_for('index')}}">Home (Forms)</a></li>
+            <li><a href="{{url_for('subjects')}}">Subjects</a></li>
+            <li><a href="{{url_for('all_pupils', schoolform_name="all")}}">All Students</a></li>
+            <li><a href="{{url_for('all_reports', schoolform_name="all", pupil_id="all")}}">All Reports</a></li>
+        </ul>
+    </div>
+</nav>
+
+<ul class="sidenav" id="mobile-demo">
     <li><a href="{{url_for('index')}}">Home (Forms)</a></li>
     <li><a href="{{url_for('subjects')}}">Subjects</a></li>
-    <li><a href="{{url_for('add_pupil')}}">Add Student</a></li>
-  </ul>
-        </nav>
+    <li><a href="{{url_for('all_pupils', schoolform_name="all")}}">All Students</a></li>
+    <li><a href="{{url_for('all_reports', schoolform_name="all",pupil_id="all")}}">All Reports</a></li>
+</ul>
+</nav>
 <body>
     <div class="container">
         {% block content %} {% endblock %}

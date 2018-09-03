@@ -2,28 +2,28 @@
 <h1>Edit student details</h1>
 <form action="{{ url_for('update_pupil', pupil_id=pupil._id)}}" method="POST">
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">person</i>
             <input id="First_Name" name="First_Name" value="{{pupil.First_Name}}" type="text">
             <label for="First_Name">First Name</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">person</i>
             <input id="Surname" name="Surname" value="{{pupil.Surname}}" type="text">
             <label for="Surname">Surname</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">cake</i>
-            <input id="Date_of_Birth" name="Date_of_Birth"  class="datepicker" value="{{pupil.Date_of_Birth}}" type="text">
+            <input id="Date_of_Birth" name="Date_of_Birth" class="datepicker" value="{{pupil.Date_of_Birth}}" type="text" required>
             <label for="Date_of_Birth">Date of Birth</label>
         </div>
     </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">group</i>
             <select name="Form_Name">
                 {% for schoolform in schoolforms %}
@@ -39,9 +39,7 @@
     </div>
 </form>
 
-{% endblock %}
-
-{% block additional_scripts %}
+{% endblock %} {% block additional_scripts %}
 <script src="{{ url_for('static', filename='js/task_datepicker.js') }}"></script>
 <script>
     $(document).ready(function() {

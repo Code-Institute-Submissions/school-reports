@@ -1,22 +1,21 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Add new form</h1>
 <form action="{{ url_for('insert_form') }}" method="POST">
-    
- <div class="row">
+    <div class="row">
         <div class="input-field col s6">
             <i class="material-icons prefix">group</i>
-            <input id="form_name" name="Form_Name" type="text">
+            <input id="form_name" name="Form_Name" type="text" required>
             <label for="form_name">Form Name</label>
         </div>
- </div>
-  <div class="row">
+    </div>
+    <div class="row">
         <div class="input-field col s6">
             <i class="material-icons prefix">school</i>
-            <input id="teacher" name="Teacher" type="text">
+            <input id="teacher" name="Teacher" type="text" required>
             <label for="teacher">Teacher</label>
         </div>
- </div>       
- <div class="row">
+    </div>
+    <div class="row">
         <button class="btn waves-effect waves-light" type="submit">Submit
         </button>
     </div>

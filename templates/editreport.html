@@ -1,13 +1,33 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Edit report for {{report.First_Name}} {{report.Surname}} - {{report.Form_Name}}</h1>
 <form action="{{ url_for('update_report', pupil_id=pupil_id, report_id=report._id, schoolform_name=schoolform_name)}}" method="POST">
-    <input type="hidden" value="{{report.First_Name}}" name="First_Name" />
-    <input type="hidden" value="{{report.Surname}}" name="Surname" />
-    <input type="hidden" value="{{report.Form_Name}}" name="Form_Name" />
-    <input type="hidden" value="{{report.Date_of_Birth}}" name="Date_of_Birth" />
-    
+        <div class="row">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">person</i>
+            <input id="First_Name" name="First_Name" value="{{report.First_Name}}" type="text">
+            <label for="First_Name">First Name</label>
+        </div>
+    </div>
     <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">person</i>
+            <input id="Surname" name="Surname" value="{{report.Surname}}" type="text">
+            <label for="Surname">Surname</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
+            <i class="material-icons prefix">group</i>
+            <select name="Form_Name">
+                {% for schoolform in schoolforms %}
+                <option {% if schoolform.Form_Name == report.Form_Name %}selected{% endif %}>{{schoolform.Form_Name}} </option>
+                {% endfor %}
+            </select>
+            <label>Form</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">local_library</i>
             <select name="Title">
                 {% for subject in subjects %}
@@ -17,27 +37,26 @@
             <label>Subject</label>
         </div>
     </div>
-      <div class="row">
-        <div class="input-field col s6">
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">date_range</i>
-            <input id="Date" name="Date" value="{{report.Date}}" class="datepicker" type="text">
+            <input id="Date" name="Date" value="{{report.Date}}" class="datepicker" type="text" required>
             <label for="Date">Date</label>
         </div>
     </div>
-     <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">subject</i>
-                <textarea name="Details" id="Details" class="materialize-textarea" data-length>{{report.Details}}</textarea>
-                <label for="Details">Details</label>
-            </div>
+    <div class="row">
+        <div class="input-field col s12">
+            <i class="material-icons prefix">subject</i>
+            <textarea name="Details" id="Details" class="materialize-textarea" data-length required>{{report.Details}}</textarea>
+            <label for="Details">Details</label>
         </div>
+    </div>
     <div class="row">
         <button class="btn waves-effect waves-light" type="submit">Submit
         </button>
     </div>
 </form>
-{% endblock %}
-{% block additional_scripts %}
+{% endblock %} {% block additional_scripts %}
 <script src="{{ url_for('static', filename='js/task_datepicker.js') }}"></script>
 <script>
     $(document).ready(function() {
@@ -46,5 +65,3 @@
     });
 </script>
 {% endblock %}
-
-

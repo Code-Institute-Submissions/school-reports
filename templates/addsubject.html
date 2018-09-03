@@ -1,17 +1,17 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Add subject</h1>
-        <form action="{{ url_for('insert_subject')}}" method="POST">
-          <div class="row">
-<div class="input-field col s6">
+<form action="{{ url_for('insert_subject')}}" method="POST">
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">local_library</i>
-            <input id="Title" name="Title" type="text">
+            <input id="Title" name="Title" type="text" required>
             <label for="Title">Name of subject</label>
         </div>
-        </div>
-        <div class="row">
+    </div>
+    <div class="row">
         <button class="btn waves-effect waves-light" type="submit">Submit
         </button>
     </div>
 </form>
-      
+
 {% endblock %}

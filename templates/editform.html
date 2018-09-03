@@ -1,26 +1,23 @@
 {% extends 'base.html'%} {% block content %}
 <h1>Edit form</h1>
 <form action="{{ url_for('update_form', schoolform_id=schoolform._id)}}" method="POST">
-    
- <div class="row">
-        <div class="input-field col s6">
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">group</i>
-            <input id="category_name" name="Form_Name" value="{{schoolform.Form_Name}}" type="text">
+            <input id="category_name" name="Form_Name" value="{{schoolform.Form_Name}}" type="text" required>
             <label for="category_name">Form Name</label>
         </div>
- </div>
-  <div class="row">
-        <div class="input-field col s6">
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6">
             <i class="material-icons prefix">school</i>
-            <input id="Teacher" name="Teacher" value="{{schoolform.Teacher}}" type="text">
+            <input id="Teacher" name="Teacher" value="{{schoolform.Teacher}}" type="text" required>
             <label for="Teacher">Teacher</label>
         </div>
- </div>       
- <div class="row">
+    </div>
+    <div class="row">
         <button class="btn waves-effect waves-light" type="submit">Submit
         </button>
     </div>
 </form>
 {% endblock %}
-
-
