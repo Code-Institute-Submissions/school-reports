@@ -1,18 +1,40 @@
+# School Reports
 
-     ,-----.,--.                  ,--. ,---.   ,--.,------.  ,------.
-    '  .--./|  | ,---. ,--.,--. ,-|  || o   \  |  ||  .-.  \ |  .---'
-    |  |    |  || .-. ||  ||  |' .-. |`..'  |  |  ||  |  \  :|  `--, 
-    '  '--'\|  |' '-' ''  ''  '\ `-' | .'  /   |  ||  '--'  /|  `---.
-     `-----'`--' `---'  `----'  `---'  `--'    `--'`-------' `------'
-    ----------------------------------------------------------------- 
+This app creates school reports all stored in a MongoDB database.
 
+## Features
 
-Hi there! Welcome to Cloud9 IDE!
+* Create reports
+* Add new class and teacher
+* Add new student
+* Add new subject
 
-To get you started, create some files, play with the terminal,
-or visit http://docs.c9.io for our documentation.
-If you want, you can also go watch some training videos at
-http://www.youtube.com/user/c9ide.
+## Installation
 
-Happy coding!
-The Cloud9 IDE team
+$ sudo pip3 install Flask
+$ sudo pip3 install pymongo
+
+### Requirements
+
+* Python 3
+* Flask==1.0.2
+* Flask-PyMongo==2.1.0
+* Jinja2==2.10
+* MarkupSafe==1.0
+* Werkzeug==0.14.1
+* click==6.7
+* itsdangerous==0.24
+* pymongo==3.7.1
+
+## Build status
+
+Complete.
+
+## Testing
+
+The site has been tested on different browsers and via responsinator.com
+
+## License information
+
+Open source.
+
